@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Удаление повторов слов</title>
+</head>
+<body>
+    <script>
+        let s = prompt("Введите строку из слов, разделенных пробелами:");
+        if(s !== null) {
+            let words = s.trim().split(/\s+/);
+            let unique = [];
+            for(let word of words) {
+                if(!unique.includes(word)) {
+                    unique.push(word);
+                }
+            }
+            let res = unique.join(' ');
+            alert(`Результат: ${res}`);
+        }
+    </script>
+    
+</body>
+</html>

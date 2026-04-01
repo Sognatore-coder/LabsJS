@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Красные ячейки в матрице</title>
+    <style>
+        table, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+        }
+        .red {
+            background-color: red;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <table id="tableRed"></table>
+    <script>
+        let name = "Кирилл";
+        let surname = "Беседин";
+        let n = name.length;
+        let m = surname.length;
+        let table = document.getElementById('tableRed');
+        for (let i = 1; i <= n; i++) {
+            let row = document.createElement('tr');
+            for (let j = 1; j <= m; j++) {
+                let cell = document.createElement('td');
+                cell.textContent = `${i}:${j}`;
+                if ((i + j) % 2 === 0) {
+                    cell.classList.add('red');
+                }
+                row.appendChild(cell);
+            }
+            table.appendChild(row);
+        }
+    </script>
+</body>
+</html>

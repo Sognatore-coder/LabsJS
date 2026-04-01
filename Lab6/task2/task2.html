@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Таблица имени и фамилии</title>
+     <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tbody id="tableBody"></tbody>
+    </table>
+    <script>
+        let name = "Кирилл";
+        let surname = "Беседин";
+        let n = name.length;
+        let m = surname.length;
+        let body = document.getElementById('tableBody');
+        for (let i = 1; i <= n; i++) {
+            let row = document.createElement('tr');
+            for (let j = 1; j <= m; j++) {
+                let cell = document.createElement('td');
+                cell.textContent = `${i}:${j}`;
+                row.appendChild(cell);
+            }
+            body.appendChild(row);
+        }
+    </script>
+</body>
+</html>

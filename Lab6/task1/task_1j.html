@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Месяцев до 1 сентября</title>
+</head>
+<body>
+    <script>
+        let today = new Date();
+        let currentYear = today.getFullYear();
+        let septemberFirst = new Date(currentYear, 8, 1);
+        if (today > septemberFirst) {
+            septemberFirst = new Date(currentYear + 1, 8, 1);
+        }
+        let monthsDiff = (septemberFirst.getFullYear() - today.getFullYear()) * 12 +
+                         (septemberFirst.getMonth() - today.getMonth());
+        alert(`До 1 сентября осталось ${monthsDiff} месяцев`);
+    </script>
+</body>
+</html>

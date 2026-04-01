@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Прибавление дней</title>
+</head>
+<body>
+    <script>
+        let n = parseInt(prompt("Введите количество дней:"));
+        if (!isNaN(n)) {
+            let currentDate = new Date();
+            let newDate = new Date(currentDate);
+            newDate.setDate(currentDate.getDate() + n);
+            alert(`Текущая дата: ${currentDate.toLocaleDateString()}\nНовая дата: ${newDate.toLocaleDateString()}`);
+        }
+    </script>
+</body>
+</html>
