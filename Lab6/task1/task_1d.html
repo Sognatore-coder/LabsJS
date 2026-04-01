@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Проверка email</title>
+</head>
+<body>
+    <script>
+        let email = prompt("Введите адрес электронной почты:");
+        if(email !== null) {
+            if(!email.includes('@')) {
+                alert("Предупреждение: в email отсутствует символ @");
+            } else {
+                alert("Email корректен");
+            }
+        }
+    </script>
+</body>
+</html>

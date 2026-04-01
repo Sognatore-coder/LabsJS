@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Массив случайных чисел</title>
+</head>
+<body>
+    <script>
+        let n = parseInt(prompt("Введите кол-во чисел:"));
+        if(!isNaN(n) && n > 0) {
+            let arr = [];
+            for(let i = 0; i < n; i++) {
+                arr.push(Math.floor(Math.random() * 100));
+            }
+            arr.reverse();
+            let output = "";
+            for(let i = 0; i < arr.length; i++){
+                output += arr[i] + " ";
+                if((i + 1) % 5 === 0) output += "\n";
+            }
+            alert(output);
+        }
+    </script>
+</body>
+</html>

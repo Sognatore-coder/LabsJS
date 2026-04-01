@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Точка в квадрате</title>
+</head>
+<body>
+    <script>
+        let x1=parseFloat(prompt("Введите x1:"))
+        let y1=parseFloat(prompt("Введите y1:"))
+        let x2=parseFloat(prompt("Введите x2:"))
+        let y2=parseFloat(prompt("Введите y2:"))
+        let x =parseFloat(prompt("Введите x точки:"))
+        let y =parseFloat(prompt("Введите y точки:"))
+
+        if(!isNaN(x1) && !isNaN(y1) && !isNaN(x2) && !isNaN(y2) && !isNaN(x) && !isNaN(y)) {
+            let left = Math.min(x1,x2);
+            let right = Math.max(x1,x2);
+            let bottom = Math.min(y1,y2);
+            let top = Math.max(y1,y2);
+
+            if(x >= left && x <= right && y >= bottom && y <= top) {
+                alert(`Точка (${x}, ${y}) принадлежит квадрату`);
+            } else {
+                alert(`Точка (${x}, ${y}) не принадлежит квадрату`);
+            }
+        } else {
+            alert("Ошибка ввода");
+        }
+    </script>
+</body>
+</html>

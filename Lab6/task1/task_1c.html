@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Сумма двух квадратов</title>
+</head>
+<body>
+    <script>
+        let n = parseInt(prompt("Введите натуральное число:"));
+        if(!isNaN(n) && n > 0){
+            let found = false;
+            for(let a = 1; a * a <=n; a++){
+                let b2 = n - a * a;
+                let b = Math.sqrt(b2);
+                if(b === Math.floor(b) && b > 0) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) {
+                alert(`${n} можно представить в виде суммы двух квадратов`);
+            } else {
+                alert(`${n} нельзя представить в виде суммы двух квадратов`);
+            }
+        } else {
+            alert("Введите натуральное число");
+        }
+    </script>
+</body>
+</html>

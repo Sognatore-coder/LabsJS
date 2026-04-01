@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Доля латинских букв</title>
+</head>
+<body>
+    <script>
+        let s = prompt("Введите строку:");
+        if (s !== null && s.length > 0) {
+            let latinCount = 0;
+            for (let i = 0; i < s.length; i++) {
+                let code = s.charCodeAt(i);
+                if ((code >= 65 && code <= 90) || (code >= 97 && code <= 122)) {
+                    latinCount++;
+                }
+            }
+            let percent = (latinCount / s.length) * 100;
+            alert(`Доля латинских букв: ${percent.toFixed(2)}%`);
+        }
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <ul id="dynamicList"></ul>
+    <script>
+        let count = parseInt(prompt("Сколько пунктов добавить?"));
+        if (!isNaN(count) && count > 0) {
+            let ul = document.getElementById('dynamicList');
+            for (let i = 0; i < count; i++) {
+                let content = prompt(`Введите содержимое пункта ${i+1}:`);
+                if (content !== null) {
+                    let li = document.createElement('li');
+                    li.textContent = content;
+                    ul.appendChild(li);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
