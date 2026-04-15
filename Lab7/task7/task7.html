@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Настройка линии</title>
+   <style>
+        body { font-family: Arial; margin: 20px; }
+        .preview { margin-top: 50px; }
+        hr { margin-top: 20px; }
+    </style>
+</head>
+<body>
+   <h3>Горизонтальные линии</h3>
+
+    <label>Выравнивание:</label><br>
+    <input type="radio" name="align" value="left" checked> LEFT
+    <input type="radio" name="align" value="center"> CENTER
+    <input type="radio" name="align" value="right"> RIGHT
+    <br><br>
+
+    <label>Толщина линии (size):</label>
+    <input type="number" id="size" value="5" min="1" max="20"><br><br>
+
+    <label>Длина линии (width):</label>
+    <input type="number" id="width" value="300" min="50" max="500"><br><br>
+
+    <label>Цвет:</label>
+    <select id="color">
+        <option value="teal">teal</option>
+        <option value="green">green</option>
+        <option value="olive">olive</option>
+        <option value="navy">navy</option>
+        <option value="red">red</option>
+        <option value="gray">gray</option>
+        <option value="blue">blue</option>
+    </select><br><br>
+
+    <button id="apply">Выполнить</button>
+    <button id="reset">Обновить</button>
+
+    <div class="preview">
+        <h4>Предпросмотр:</h4>
+        <hr id="line">
+    </div>
+
+    <script>
+        const line = document.getElementById('line');
+        
+        function updateLine() {
+            // Толщина
+            line.style.height = document.getElementById('size').value + 'px';
+            // Длина
+            line.style.width = document.getElementById('width').value + 'px';
+            // Цвет
+            line.style.backgroundColor = document.getElementById('color').value;
+            line.style.border = 'none';
+            
+            // Выравнивание
+            const align = document.querySelector('input[name="align"]:checked').value;
+            if (align === 'left') {
+                line.style.marginLeft = '0';
+                line.style.marginRight = 'auto';
+            } else if (align === 'center') {
+                line.style.marginLeft = 'auto';
+                line.style.marginRight = 'auto';
+            } else if (align === 'right') {
+                line.style.marginLeft = 'auto';
+                line.style.marginRight = '0';
+            }
+        }
+        
+        function resetLine() {
+            document.getElementById('size').value = 5;
+            document.getElementById('width').value = 300;
+            document.getElementById('color').value = 'teal';
+            document.querySelector('input[value="left"]').checked = true;
+            updateLine();
+        }
+        
+        document.getElementById('apply').addEventListener('click', updateLine);
+        document.getElementById('reset').addEventListener('click', resetLine);
+        
+        // Инициализация
+        updateLine();
+    </script>
+</body>
+</html>

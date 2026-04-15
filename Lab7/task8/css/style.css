@@ -1,0 +1,85 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f0f2f5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header {
+    height: 60px;
+    background: #3b7cbf;
+    width: 100%;
+}
+main {
+    max-width: 600px;
+    width: 90%;
+    background: white;
+    margin: 30px auto;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+}
+.invisible {
+    display: none;
+}
+section {
+    transition: 0.3s;
+}
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+button {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 8px;
+    background: #3b7cbf;
+    color: white;
+    cursor: pointer;
+    margin-top: 10px;
+}
+button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+button:hover:not(:disabled) {
+    background: #2a5a8c;
+}
+input, select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+.card-inputs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+.card-inputs input {
+    text-align: center;
+}
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+}
+.step {
+    width: 40px;
+    height: 40px;
+    background: #ddd;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+}
+.step.active {
+    background: #3b7cbf;
+    color: white;
+}

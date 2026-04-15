@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Скрыть кнопку</title>
+</head>
+<body>
+    <button id="clearBtn">Скрыть кнопку</button>
+
+    <script>
+        const clearBtn = document.getElementById('clearBtn');
+
+        clearBtn.addEventListener('click', () => {
+            clearBtn.style.display = 'none';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Координаты мыши</title>
+</head>
+<body>
+    <h2>Кликните в любом месте страницы</h2>
+    <div class="coords">Координаты: </div>
+
+    <script>
+        const coordsDiv = document.querySelector('.coords');
+
+        document.addEventListener('click', function(event) {
+            coordsDiv.innerHTML = `Координаты: X = ${event.clientX}, Y = ${event.clientY}`;
+        });
+    </script>
+</body>
+</html>

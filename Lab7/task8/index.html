@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация в Сервис</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/loader.css">
+</head>
+<body>
+    <header></header>
+
+    <!-- Лоадер -->
+    <section id="loader">
+        <div class="loader-container">
+            <div class="loader-bar"></div>
+            <p>Браузерные гномы собирают страницу...</p>
+        </div>
+    </section>
+
+    <script src="js/loader.js"></script>
+
+    
+    <main id="page" class="invisible">
+        <!-- Шаги -->
+        <div class="step-indicator">
+            <div class="step active">1</div>
+            <div class="step">2</div>
+            <div class="step">3</div>
+            <div class="step">4</div>
+        </div>
+
+        <!-- Начало -->
+        <section id="frame_0">
+            <p>Добро пожаловать в <span>Сервис</span>!</p>
+            <small>Для продолжения нужно зарегистрироваться</small><br>
+            <button type="button" id="startRegBtn">Регистрация</button>
+        </section>
+
+        <!-- Персональные данные -->
+        <section id="frame_1" class="invisible">
+            <h2>Шаг 1. Персональные данные</h2>
+            <form id="personalForm">
+                <label>Имя: <input type="text" id="firstName"></label>
+                <label>Фамилия: <input type="text" id="lastName"></label>
+                <label>Электронная почта: <input type="email" id="email"></label>
+                <label>Адрес: <input type="text" id="address"></label>
+                <label>Страна:
+                    <select id="country"></select>
+                </label>
+                <label>Пароль: <input type="password" id="password"></label>
+                <label>Повторите пароль: <input type="password" id="confirmPassword"></label>
+                <div class="buttons">
+                    <button type="button" id="cancelBtn">Отмена</button>
+                    <button type="button" id="nextToPhone" disabled>Далее</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Телефоный номер -->
+        <section id="frame_2" class="invisible">
+            <h2>Шаг 2. Телефонный номер</h2>
+            <p>В целях безопасности Сервису нужно подтверждение вашего телефонного номера. На ваш номер будет отправлен 4-значный код подтверждения.</p>
+            <div class="phone-group">
+                <input type="text" id="phone" placeholder="+7 (xxx) xxx-xx-xx" maxlength="16">
+                <button type="button" id="sendCodeBtn" disabled>Отправить</button>
+            </div>
+            <div id="codeSection" class="invisible">
+                <label>Код подтверждения: <input type="text" id="verificationCode" maxlength="4" placeholder="XXXX"></label>
+                <button type="button" id="checkCodeBtn" disabled>Проверить</button>
+            </div>
+            <div class="buttons">
+                <button type="button" id="backToPersonal">Назад</button>
+                <button type="button" id="nextToPayment" disabled>Далее</button>
+            </div>
+        </section>
+
+        <!-- Оплата -->
+        <section id="frame_3" class="invisible">
+            <h2>Шаг 3. Метод оплаты</h2>
+            <p>Для совершения покупок в Сервисе необходимо подключить банковскую карту.</p>
+            <div class="card-inputs">
+                <input type="text" class="card-part" maxlength="4" placeholder="1111">
+                <input type="text" class="card-part" maxlength="4" placeholder="2222">
+                <input type="text" class="card-part" maxlength="4" placeholder="3333">
+                <input type="text" class="card-part" maxlength="4" placeholder="4444">
+            </div>
+            <label>Срок действия: <input type="text" id="expiry" placeholder="MM/YY"></label>
+            <label>CVV: <input type="password" id="cvv" maxlength="3" placeholder="XXX"></label>
+            <label><input type="checkbox" id="agreeTerms"> Я согласен с любыми условиями, ничего не хочу читать, дайте мне уже пользоваться сервисом</label>
+            <div class="buttons">
+                <button type="button" id="backToPhone">Назад</button>
+                <button type="button" id="finishReg" disabled>Завершить</button>
+            </div>
+        </section>
+
+        <!-- Финиш -->
+        <section id="frame_4" class="invisible">
+            <h2>Поздравляем!</h2>
+            <p>Регистрация успешно завершена!</p>
+            <p>Благодарим за использование нашего сервиса!</p>
+        </section>
+    </main>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
