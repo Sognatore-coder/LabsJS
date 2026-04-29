@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Таблица людей</title>
+    <style>
+        table { 
+            border-collapse: collapse; 
+            width: 100%; 
+            margin-top: 20px; 
+        }
+        th, td { border: 1px solid #ccc; 
+            padding: 8px; 
+            text-align: left; 
+        }
+        .young { background-color: #c8e6c9; }
+        .middle { background-color: #fff9c4; }
+        .senior { background-color: #ffcdd2; }
+        button { 
+            margin: 5px; 
+            padding: 6px 12px; 
+            cursor: pointer; 
+        }
+        .filter-bar { margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h2>Управление данными</h2>
+    <button id="loadBtn">📥 Загрузить данные</button>
+    <div class="filter-bar">
+        <label>Показать:</label>
+        <select id="genderFilter">
+            <option value="all">Все</option>
+            <option value="male">Только мужчины</option>
+            <option value="female">Только женщины</option>
+        </select>
+        <button id="addBtn">➕ Добавить запись</button>
+        <button id="deleteSelectedBtn">🗑️ Удалить выбранные</button>
+    </div>
+    <div id="tableContainer"></div>
+
+    <script type="module">
+        import { getData } from './humansData.js';
+
+        let currentData = [];
+        let selectedRows = new Set();
+
+        function ageClass(age) {
+            if (age < 18) return 'young';
+            if (age >= 60) return 'senior';
+            return 'middle';
+        }
+
+        function renderTable() {
+            const filterVal = document.getElementById('genderFilter').value;
+            const filtered = currentData.filter(h => {
+                if (filterVal === 'all') return true;
+                if (filterVal === 'male') return h.gender === 'male';
+                if (filterVal === 'female') return h.gender === 'female';
+                return false;
+            });
+            const container = document.getElementById('tableContainer');
+            if (!filtered.length) {
+                container.innerHTML = '<p>Нет данных</p>';
+                return;
+            }
+            // Используем оригинальные индексы для удаления
+            let html = `<table><thead><tr>
+                <th><input type="checkbox" id="selectAll"></th>
+                <th>Имя</th><th>Фамилия</th><th>Возраст</th><th>Пол</th><th>Телефон</th><th>Адрес</th><th>Действия</th>
+            </tr></thead><tbody>`;
+            filtered.forEach((h, idx) => {
+                const originalIdx = currentData.findIndex(orig => orig === h);
+                const checked = selectedRows.has(originalIdx) ? 'checked' : '';
+                html += `<tr class="${ageClass(h.age)}">
+                    <td><input type="checkbox" class="rowCheckbox" data-idx="${originalIdx}" ${checked}></td>
+                    <td contenteditable="true" onblur="editField(${originalIdx}, 'firstName', this.innerText)">${h.firstName}</td>
+                    <td contenteditable="true" onblur="editField(${originalIdx}, 'lastName', this.innerText)">${h.lastName}</td>
+                    <td contenteditable="true" onblur="editField(${originalIdx}, 'age', parseInt(this.innerText))">${h.age}</td>
+                    <td>
+                        <select onchange="editField(${originalIdx}, 'gender', this.value)">
+                            <option ${h.gender === 'male' ? 'selected' : ''}>male</option>
+                            <option ${h.gender === 'female' ? 'selected' : ''}>female</option>
+                        </select>
+                    </td>
+                    <td contenteditable="true" onblur="editField(${originalIdx}, 'phone', this.innerText)">${h.phone}</td>
+                    <td contenteditable="true" onblur="editField(${originalIdx}, 'address', this.innerText)">${h.address}</td>
+                    <td><button onclick="deleteRow(${originalIdx})">❌</button></td>
+                </tr>`;
+            });
+            html += `</tbody></table>`;
+            container.innerHTML = html;
+
+            // Привязываем события к чекбоксам
+            document.querySelectorAll('.rowCheckbox').forEach(cb => {
+                cb.addEventListener('change', (e) => {
+                    const idx = parseInt(e.target.dataset.idx);
+                    if (e.target.checked) selectedRows.add(idx);
+                    else selectedRows.delete(idx);
+                });
+            });
+            document.getElementById('selectAll')?.addEventListener('change', (e) => {
+                document.querySelectorAll('.rowCheckbox').forEach(cb => {
+                    cb.checked = e.target.checked;
+                    const idx = parseInt(cb.dataset.idx);
+                    if (e.target.checked) selectedRows.add(idx);
+                    else selectedRows.delete(idx);
+                });
+            });
+        }
+
+        
+        window.editField = (idx, field, value) => {
+            if (field === 'age') value = parseInt(value) || 0;
+            currentData[idx][field] = value;
+            renderTable();
+        };
+        window.deleteRow = (idx) => {
+            currentData.splice(idx, 1);
+            selectedRows.clear();
+            renderTable();
+        };
+
+        document.getElementById('loadBtn').onclick = async () => {
+            currentData = await getData();
+            selectedRows.clear();
+            renderTable();
+        };
+        document.getElementById('addBtn').onclick = () => {
+            currentData.push({
+                firstName: 'Новый', lastName: 'Пользователь', age: 25,
+                gender: 'male', phone: '+70000000000', address: 'г. Новый, ул. Новая'
+            });
+            renderTable();
+        };
+        document.getElementById('deleteSelectedBtn').onclick = () => {
+            if (selectedRows.size === 0) return;
+            currentData = currentData.filter((_, idx) => !selectedRows.has(idx));
+            selectedRows.clear();
+            renderTable();
+        };
+        document.getElementById('genderFilter').onchange = () => renderTable();
+    </script>
+</body>
+</html>
